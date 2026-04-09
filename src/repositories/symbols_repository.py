@@ -1,7 +1,7 @@
 import json
 import random
 
-from singletons.appsettings import appsettings
+from src.singletons.appsettings import appsettings
 
 class symbols_repository:
     """This repostiory is responsible for managing the symbols file."""
