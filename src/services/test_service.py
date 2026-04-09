@@ -26,6 +26,7 @@ class test_service:
         text = self.generate_input_message(symbols)
         result = self.get_result(text)
         self.wrong_symbols = self.verify(user_symbols=result, true_symbols=symbols)
+        print(self.generate_response_message(self.wrong_symbols))
 
 
     def get_symbols(self, num: int) -> list[str]:
@@ -37,6 +38,15 @@ class test_service:
         symbols.extend(new_symbols)
 
         return symbols
+    
+    @staticmethod
+    def generate_response_message(wrong_symbols: list[str]) -> str:
+        """Generates a response based on the accuracy of the user."""
+
+        if len(wrong_symbols) == 0:
+            return "Correct, Good Job!"
+        
+        return f"You got these symbols wrong: {"".join(wrong_symbols)}"
     
     @staticmethod
     def verify(user_symbols: list[str], true_symbols: list[str]) -> list[str]:
@@ -70,8 +80,8 @@ class test_service:
         """
 
         starting_text: str = "Please type the following symbols:\n"
-        starting_text.join(symbols)
-        return starting_text
+        symbol_text = "".join(symbols)
+        return starting_text + symbol_text + "\n"
     
     @staticmethod
     def get_result(message: str) -> list[str]:
